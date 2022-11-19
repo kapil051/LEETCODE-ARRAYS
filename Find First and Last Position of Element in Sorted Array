@@ -38,3 +38,58 @@ public:
       return ans;  
     }
 };
+
+
+**********************************************************METHOD 2*****************************************************************************8
+
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+          vector<int>  output;
+
+       // Input: nums = [5,7,8,8,8,10], target = 8
+        // Output: [3,4]
+        
+         
+        
+
+        for(int i=0;i<nums.size();i++){
+            
+            if(target==nums[i]){
+                output.push_back(i);
+            }
+          
+
+        }
+        
+        // OUTPUT=[2,3,4]
+
+      //IF SIZE OF THE OUTPUT IS 0 PUSH -1 AND -1 AND RETURN OUTPUT 
+
+        if(output.size()==0){
+          output.push_back(-1);
+          output.push_back(-1);
+            
+           return output;
+        }
+        
+        
+        
+            vector<int> output1;
+       
+        
+        //MAKE A NEW VECTOR AND PUSH FIRST AND LAST INDEX OF THE OUTPUT
+        //[2,3,4]==[2,4]
+        
+        
+     else{
+
+        output1.push_back(output[0]);
+        output1.push_back(output[output.size()-1]);
+     }
+
+        //RETURN [2,4]
+
+     return output1;
+    }
+};
