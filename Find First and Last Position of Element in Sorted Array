@@ -1,0 +1,40 @@
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        
+           vector<int> ans;
+        
+        // [5,7,7,8,8,10]   TARGET:8
+        
+        for(int i=0;i<nums.size();i++){
+            
+            if(nums[i]==target) {
+                 ans.push_back(i);
+                  break;
+            }
+            
+        } 
+        
+          //ans=[3]
+        
+        for(int i=nums.size()-1;i>=0;i--){
+            
+            if(nums[i]==target){
+                ans.push_back(i);
+                 break;
+            }
+            
+        }
+        
+           //ans=[3,4]
+        
+        if(ans.size()==0){
+            ans.push_back(-1);
+            ans.push_back(-1);
+        }
+        
+        //ans=[-1,-1]  IF TARGET==4 IN AVOVE DOES NOT PRESENT IN THE ARRAY
+        
+      return ans;  
+    }
+};
