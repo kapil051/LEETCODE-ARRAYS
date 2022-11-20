@@ -1,0 +1,129 @@
+Given an array nums of size n, return the majority element.
+
+The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+
+ 
+
+Example 1:
+
+Input: nums = [3,2,3]
+Output: 3
+Example 2:
+
+Input: nums = [2,2,1,1,1,2,2]
+Output: 2
+ 
+
+Constraints:
+
+n == nums.length
+1 <= n <= 5 * 104
+-109 <= nums[i] <= 109
+ 
+
+Follow-up: Could you solve the problem in linear time and in O(1) space?
+
+//****************************************************************************CODE1**********************************************************************************
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        
+          // Input: nums = [2,2,1,1,1,2,2]
+          // Output: 2
+        
+        
+        sort(nums.begin(),nums.end());
+        
+         //MAKE COUNT AS 1
+        
+            int count=1;
+        
+            int majEle=0;
+        
+        for(int i=1;i<=nums.size();i++){    
+            
+            //IF I GOES OUT OF THE ARRAY THEN ALSO CHECK COUNT
+            
+            if(i==nums.size()){
+                
+                  if(count>nums.size()/2) {
+                    
+                    majEle=nums[i-1];
+                    break;
+                } 
+                
+            }
+            
+            //IF ITH ELEMENT IS EQUAL TO THE I-1 ELEMENT THEN INCREASE THE COUNT
+             
+            if(nums[i]==nums[i-1]){
+                 count++;
+            } 
+            
+            //IF ELEMENT IS NOT EQUAL TO THE PREVIOUS ELEMENT THEN CHECK  IF COUNT GRETER THEN HALF               //    THE SIZE OF ARRAY
+            
+            else{
+                
+                if(count>nums.size()/2) {
+                    
+                    majEle=nums[i-1];
+                    break;
+                } 
+                
+                count=1;
+            }
+            
+        }
+        
+        //RETURN THE MAJORITY ELEMENT
+       
+        return majEle;
+    }
+};
+
+//**************************************************************************************CODE2******************************************************************************
+
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        
+        //IF A NUMBER PRESENT MORE THAN ITS HALF SIZE THEN IT ALWAYS MUST BE PRESENT AT MID POSITION
+        
+        sort(nums.begin(),nums.end());
+        
+        //RETURN ELEMENT AT MID INDEX AFTER SORTING
+                
+        return nums[nums.size()/2];
+        
+    }
+};
+
+
+//*************************************************************MORE'S VOTING ALGORITHM******************************************************************************
+
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        
+        int majority,count=0;
+        
+        for(int i=0;i<nums.size();i++)
+        {
+            if(count)
+            {
+                count+=(nums[i]==majority ? 1 : -1);
+            }
+            
+            
+            else
+            {
+                majority=nums[i];
+                count=1;
+            }
+        }
+        return majority;
+    }
+};
