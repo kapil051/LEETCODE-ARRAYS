@@ -22,6 +22,7 @@ Constraints:
 
 *******************************************************USING BASIC APPROACH**************************************************************
 //USING NESTED FOR LOOPS
+//T.C=O(N3)
 
 class Solution {
 public:
@@ -60,4 +61,89 @@ public:
     }
 };
 
+***************************************************************APPROACH2*****************************************************************************************
+//USING TWO NESTED LOOPS
+//T.C=O(N2)
+//USING PREFIX SUM ARRAY
+
+class Solution {
+public:
+    
+    int subarraySum(vector<int>& nums, int k) {
+        
+                 int count=0;
+        
+         vector<int> prefix_sum(nums.size());
+        
+                prefix_sum[0]=nums[0];
+        
+        for(int i=1;i<nums.size();i++){
+            
+           prefix_sum[i]=nums[i]+prefix_sum[i-1];
+                         
+        }
+     
+        for(int i=0;i<nums.size();i++){
+            
+             for(int j=i;j<nums.size();j++){
+                 
+              cout<<"i:"<<i<<" "<<"j:"<<j<<" ";   
+                 
+               if(i==0){
+                   
+                   int sum=prefix_sum[j];
+                   
+                    cout<<"sum:"<<sum<<endl;
+                  
+                   if(sum==k) count++;
+                   
+               } 
+                 
+                 else{
+                     
+                     int sum=prefix_sum[j]-prefix_sum[i-1];
+                     
+                      cout<<"sum:"<<sum<<endl;
+                     
+                     if(sum==k) count++;
+                 }
+                 
+             }
+            
+        }
+        
+        return count;
+    }
+};
+
+************************************************************APPROACH3*************************************************************************
+//USING HASHMAPS
+//T.C=O(N)
+//S.C.=O(N)
+
+class Solution {
+public:
+    
+    int subarraySum(vector<int>& nums, int k) {
+    
+         int count=0;
+        
+         int sum=0;
+        
+       unordered_map<int,int> mp;
+        
+        for(int i=0;i<nums.size();i++){
+            
+              sum+=nums[i];
+            
+            if(sum==k) count++;
+            
+            if(mp[sum-k]) count+=mp[sum-k];
+            
+            mp[sum]++;
+        }
+    
+        return count;
+    }
+};
 
