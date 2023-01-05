@@ -1,0 +1,33 @@
+
+bool comp(vector<int> &a,vector<int> &b) {
+    return a[1]<b[1];
+}
+    
+
+class Solution {
+public:
+    
+    int eraseOverlapIntervals(vector<vector<int>>& nums) {
+        
+             if(nums.size()==1) return 0;
+      
+             sort(nums.begin(), nums.end(), comp);
+        
+           for(auto &i:nums) cout<<i[0]<<" "<<i[1]<<endl;
+        
+             int count=0;
+             int prev=nums[0][1];
+        
+        for(int i=1;i<nums.size();i++){
+            
+            if(nums[i][0]<prev) count++;
+       
+             else prev=nums[i][1];  
+            
+             cout<<"prev:"<<prev<<" ";
+            
+        }
+        
+        return count;
+    }
+};
